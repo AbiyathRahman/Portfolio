@@ -180,6 +180,29 @@ const fallbackProjects = [
       repo: 'https://github.com/AbiyathRahman/carebridge-lite',
     },
   },
+  {
+    id: 'real-time-collaborative-code-editor',
+    title: 'Real-Time Collaborative Code Editor',
+    summary:
+      'A WebSocket-powered collaborative coding platform enabling real-time synchronization across multiple users with conflict resolution.',
+    stack: ['Node.js', 'Express.js', 'MongoDB', 'Redis', 'React'],
+    role: 'Full-stack engineer focusing on real-time architecture and distributed systems.',
+    problem:
+      'Existing collaborative editors struggled with conflict resolution when multiple users edited the same document simultaneously, leading to data loss and synchronization issues.',
+    solution:
+      'Architected a WebSocket-based synchronization system using Socket.io with Operational Transformation for conflict-free text merges, implemented distributed presence tracking with Redis Pub/Sub for horizontal scaling, and built a MongoDB persistence layer for incremental operation logs.',
+    outcome:
+      'Successfully supports 10+ simultaneous users with real-time cursor synchronization, full revision history, and time-travel debugging capabilities across multiple server instances.',
+    highlights: [
+      'Architected WebSocket-based synchronization system using Socket.io with Operational Transformation for conflict-free text merges across 10+ simultaneous users.',
+      'Implemented distributed presence tracking and cursor synchronization using Redis Pub/Sub, enabling horizontal scaling across multiple server instances without session affinity.',
+      'Built document persistence layer with MongoDB storing incremental operation logs, supporting full revision history and time-travel debugging.',
+      'Integrated Monaco Editor with syntax highlighting.',
+    ],
+    links: {
+      demo: 'https://real-time-collaborative-code-editor-azure.vercel.app',
+    },
+  },
 ];
 
 const defaultState = {
