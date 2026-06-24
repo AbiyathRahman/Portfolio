@@ -12,7 +12,7 @@ function AboutPage() {
     <div className="page about-page">
       <header className="section">
         <p className="eyebrow">About</p>
-        <h1>Crafting thoughtful, performant web experiences.</h1>
+        <h1>Backend-focused engineering, built for scale.</h1>
         <p>{profile.intro}</p>
       </header>
 
@@ -21,6 +21,15 @@ function AboutPage() {
         <ul className="skill-tags">
           {profile.skills.map((skill) => (
             <li key={skill}>{skill}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="section">
+        <h2>Relevant coursework</h2>
+        <ul className="skill-tags">
+          {profile.coursework?.map((course) => (
+            <li key={course}>{course}</li>
           ))}
         </ul>
       </section>

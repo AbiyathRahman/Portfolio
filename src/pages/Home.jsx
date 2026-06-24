@@ -4,7 +4,7 @@ import ProjectCard from '../components/ProjectCard';
 import { usePortfolioData } from '../context/PortfolioContext';
 
 function HomePage() {
-  const { profile, featuredProject, loading } = usePortfolioData();
+  const { profile, projects, featuredProject, loading } = usePortfolioData();
 
   if (loading) {
     return <LoadingState message="Loading your personalized portfolio..." />;
@@ -30,12 +30,12 @@ function HomePage() {
             <p className="hero__stat-label">Core skills</p>
           </div>
           <div>
-            <p className="hero__stat-value">20+</p>
-            <p className="hero__stat-label">Projects shipped</p>
+            <p className="hero__stat-value">{projects.length}</p>
+            <p className="hero__stat-label">Projects built</p>
           </div>
           <div>
-            <p className="hero__stat-value">2w</p>
-            <p className="hero__stat-label">Avg turnaround</p>
+            <p className="hero__stat-value">2026</p>
+            <p className="hero__stat-label">Graduating</p>
           </div>
         </div>
       </section>
@@ -56,12 +56,9 @@ function HomePage() {
       <section className="grid grid--two">
         <article className="card">
           <p className="eyebrow">About me</p>
-          <h3>A designer-friendly developer</h3>
+          <h3>Backend-focused full-stack engineer</h3>
           <p>
-            {profile.intro}{' '}
-            I collaborate closely with designers, ensuring the final build feels
-            as good as the original concept. Accessibility, performance, and clear
-            communication guide my process.
+            {profile.intro}
           </p>
           <Link className="link" to="/about">
             Read more {'->'}
@@ -69,11 +66,11 @@ function HomePage() {
         </article>
         <article className="card">
           <p className="eyebrow">Availability</p>
-          <h3>Accepting new work</h3>
+          <h3>Open to software engineering roles</h3>
           <p>
-            I'm currently open for freelance engagements, internships, and
-            in-house product roles that combine UI engineering and product
-            strategy.
+            I'm graduating in August 2026 and looking for backend or
+            full-stack software engineering roles, internships, and
+            new-grad opportunities.
           </p>
           <Link className="link" to="/contact">
             Start a conversation {'->'}

@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 const fallbackProfile = {
   name: 'Abiyath Rahman',
-  headline: 'Software Engineering Student & Backend Developer',
+  headline: 'Full-Stack Software Engineer | Backend & Distributed Systems',
   subheadline:
-    'I ship resilient backend services, data pipelines, and React frontends that showcase the results.',
+    'I build scalable, production-ready applications with Node.js, TypeScript, Redis, MongoDB, and Docker, with a focus on backend architecture and distributed systems.',
   intro:
-    'Currently pursuing a B.S. in Computer Science at Weber State University, I gravitate toward backend-heavy projects: modeling databases, building REST APIs in Java/Python/Node, and hardening deployments with Docker and AWS. I still love polishing the UI layer in React, but my goal is always to align clean architecture with the end-user experience.',
+    'I\'m a Computer Science student at Weber State University (graduating August 2026), specializing in backend architecture, distributed systems, and cloud deployment. I build production-ready applications using Node.js, TypeScript, Redis, MongoDB, and Docker, with experience designing real-time systems with WebSocket-based synchronization, fault-tolerant job queues, and AI-integrated pipelines.',
   skills: [
     'Java • Spring Boot • JUnit',
     'Python • Flask • FastAPI',
@@ -26,30 +26,81 @@ const fallbackProfile = {
       year: '2022 - Present',
     },
   ],
+  coursework: [
+    'Formal Languages and Automata Theory',
+    'DevOps and Software Delivery',
+    'Discrete Mathematics',
+    'Data Structures and Algorithms',
+    'Database Systems',
+    'Software Engineering',
+    'Software Testing',
+    'Capstone Project',
+    'Web Development',
+    'Scripting Languages',
+  ],
   experience: [
     {
       company: 'Weber State University Housing',
       role: 'Resident Assistant',
       period: 'Aug 2022 - Present',
       summary:
-        'Lead a 200+ resident community by coordinating programs, triaging emergencies, and documenting incidents. Partner with 15 RAs to streamline on-call communication (20% faster response) and resolve 10+ personal or academic challenges each semester using conflict-resolution frameworks.',
-    },
-    {
-      company: 'Freelance',
-      role: 'Software Developer',
-      period: '2023 - Present',
-      summary:
-        'Owns full-stack builds from API design through React delivery: Firebase-backed prototypes, FastAPI services, and Tailwind-first interfaces deployed to Render/Vercel.',
+        'Collaborate with 15 Resident Assistants to improve team response time by 20%, streamlining communication and operations. Resolve 90% of incidents addressing 10+ personal and academic challenges per semester using conflict resolution strategies. Manage a community of 200+ students, increasing resident satisfaction by 15% through inclusive programming.',
     },
   ],
   links: {
     github: 'https://github.com/AbiyathRahman',
     linkedin: 'https://www.linkedin.com/in/abiyath-rahman-94b4662b0',
-    resume: '#',
+    resume: '/resume/AbiyathRahman-Resume.pdf',
   },
 };
 
 const fallbackProjects = [
+  {
+    id: 'realtime-code-editor',
+    title: 'Real-Time Collaborative Code Editor',
+    summary:
+      'A multi-user code editor with conflict-free real-time synchronization, built on Socket.io and Operational Transformation.',
+    stack: ['Node.js', 'Express.js', 'MongoDB', 'Redis', 'React'],
+    role: 'Full-stack architect: real-time sync, persistence layer, editor integration.',
+    problem:
+      'Multiple people editing the same document at once need their changes merged instantly and consistently, without overwriting each other or drifting out of sync as more users join.',
+    solution:
+      'Architected a WebSocket-based synchronization system using Socket.io with Operational Transformation for conflict-free text merges, plus Redis Pub/Sub for distributed presence and cursor tracking so the system scales horizontally across server instances without session affinity. Document state persists to MongoDB as incremental operation logs, enabling full revision history and time-travel debugging.',
+    outcome:
+      'Supports 10+ simultaneous editors with sub-100ms edit propagation latency under 50 concurrent connections in load testing, integrating Monaco Editor with syntax highlighting for 15+ languages.',
+    highlights: [
+      'Conflict-free merging for 10+ simultaneous users via Operational Transformation.',
+      'Redis Pub/Sub powers distributed presence and cursor sync across multiple server instances.',
+      'MongoDB-backed operation logs support full revision history and time-travel debugging.',
+    ],
+    links: {
+      repo: 'https://github.com/AbiyathRahman/Real-Time-Collaborative-Code-Editor',
+      demo: 'https://real-time-collaborative-code-editor-azure.vercel.app',
+    },
+  },
+  {
+    id: 'distributed-task-queue',
+    title: 'Distributed Task Queue System',
+    summary:
+      'A fault-tolerant distributed job processing system with priority queues, retry logic, and a live monitoring dashboard.',
+    stack: ['Node.js', 'MongoDB', 'Redis', 'Docker', 'React'],
+    role: 'Backend architect: job processing, fault tolerance, containerized deployment.',
+    problem:
+      'Background job systems need to survive failures gracefully, prioritize urgent work, and give visibility into queue health, without losing jobs or needing manual intervention when workers crash.',
+    solution:
+      'Architected a distributed job processing system using Redis priority queues with MongoDB-backed state via Mongoose, supporting concurrent worker pools. Implemented a dead-letter collection and exponential backoff retry logic (2s/4s/8s) to handle failures gracefully, and built a React dashboard polling the REST API for job monitoring and queue depth visualization.',
+    outcome:
+      'Processes 500+ simulated jobs/minute across concurrent worker pools, reducing unhandled job failure rate by 35% against 1,000-job batches. Fully containerized with Docker Compose orchestrating the API server, 3 worker replicas, Redis, and MongoDB.',
+    highlights: [
+      'Redis priority queues with MongoDB-backed state handle 500+ jobs/minute.',
+      'Dead-letter queue and exponential backoff cut unhandled failure rate by 35%.',
+      'Docker Compose orchestrates API server, 3 worker replicas, Redis, and MongoDB.',
+    ],
+    links: {
+      repo: 'https://github.com/AbiyathRahman/Distributed-Task-Queue',
+      demo: 'https://distributed-task-queue-vgzo.vercel.app/',
+    },
+  },
   {
     id: 'weather-app',
     title: 'Realtime Weather Tracker',
@@ -142,18 +193,19 @@ const fallbackProjects = [
     id: 'insightpulse',
     title: 'InsightPulse AI Productivity Dashboard',
     summary:
-      'An AI-assisted dashboard that summarizes Google Calendar workload using Spring Boot, React, and AWS Bedrock.',
+      'A full-stack AI productivity dashboard generating real-time task and calendar insights using Claude v2.1 via AWS Bedrock and the Google Calendar API.',
     stack: ['Spring Boot', 'React', 'PostgreSQL', 'Docker', 'AWS Bedrock', 'Tailwind'],
     role: 'Backend + AI workflow engineer.',
     problem:
       'Busy students and professionals needed proactive insights about their calendars instead of reactive reminders.',
     solution:
-      'Implemented Google OAuth, persistent token storage, and Bedrock-powered prompt pipelines that convert calendar events into focus recommendations.',
+      'Implemented Google OAuth 2.0 with refresh token support and persistent user-specific token storage for seamless reauthentication. Engineered NLP prompt pipelines and response parsing to summarize calendar workload, detect overload patterns, and surface weekly focus recommendations using Claude v2.1 via AWS Bedrock.',
     outcome:
-      'Delivers weekly summaries, overload alerts, and action items through a responsive bento dashboard deployed on Render (API) and Vercel (UI).',
+      'Delivers weekly summaries, overload alerts, and action items through a responsive bento dashboard. Backend containerized with Docker and deployed to Render; frontend hosted on Vercel with JWT auth and CORS protection.',
     highlights: [
-      'Containerized backend with Docker and automated Render deploys.',
-      'Parsed Claude responses into structured insight cards with persistent client state.',
+      'Google OAuth 2.0 with refresh tokens for seamless reauthentication.',
+      'NLP prompt pipelines via Claude v2.1 on AWS Bedrock detect overload patterns and surface focus recommendations.',
+      'Dockerized backend on Render; Vercel frontend with JWT auth and CORS protection.',
     ],
     links: {
       repo: 'https://github.com/AbiyathRahman/AI-Task-Manager',
@@ -180,166 +232,19 @@ const fallbackProjects = [
       repo: 'https://github.com/AbiyathRahman/carebridge-lite',
     },
   },
-  {
-    id: 'real-time-collaborative-code-editor',
-    title: 'Real-Time Collaborative Code Editor',
-    summary:
-      'A WebSocket-powered collaborative coding platform enabling real-time synchronization across multiple users with conflict resolution.',
-    stack: ['Node.js', 'Express.js', 'MongoDB', 'Redis', 'React'],
-    role: 'Full-stack engineer focusing on real-time architecture and distributed systems.',
-    problem:
-      'Existing collaborative editors struggled with conflict resolution when multiple users edited the same document simultaneously, leading to data loss and synchronization issues.',
-    solution:
-      'Architected a WebSocket-based synchronization system using Socket.io with Operational Transformation for conflict-free text merges, implemented distributed presence tracking with Redis Pub/Sub for horizontal scaling, and built a MongoDB persistence layer for incremental operation logs.',
-    outcome:
-      'Successfully supports 10+ simultaneous users with real-time cursor synchronization, full revision history, and time-travel debugging capabilities across multiple server instances.',
-    highlights: [
-      'Architected WebSocket-based synchronization system using Socket.io with Operational Transformation for conflict-free text merges across 10+ simultaneous users.',
-      'Implemented distributed presence tracking and cursor synchronization using Redis Pub/Sub, enabling horizontal scaling across multiple server instances without session affinity.',
-      'Built document persistence layer with MongoDB storing incremental operation logs, supporting full revision history and time-travel debugging.',
-      'Integrated Monaco Editor with syntax highlighting.',
-    ],
-    links: {
-      demo: 'https://real-time-collaborative-code-editor-azure.vercel.app',
-    },
-  },
 ];
 
-const defaultState = {
-  profile: fallbackProfile,
-  projects: fallbackProjects,
-  loading: true,
-  error: null,
-  source: 'fallback',
-};
-
-const LINKS_ENDPOINT =
-  'https://portfolio-aab7f-default-rtdb.firebaseio.com/Links.json';
-
-function ensureHttps(url) {
-  if (!url) return url;
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  return `https://${url.replace(/^\/+/, '')}`;
-}
-
-function mergeProjectLinks(projects, payload) {
-  return projects.map((project) => {
-    if (project.id === 'weather-app' && payload?.weatherApp) {
-      return {
-        ...project,
-        links: {
-          ...project.links,
-          demo: ensureHttps(payload.weatherApp),
-        },
-      };
-    }
-    if (project.id === 'food-ordering-app' && payload?.foodOrderingApp) {
-      return {
-        ...project,
-        links: {
-          ...project.links,
-          demo: ensureHttps(payload.foodOrderingApp),
-        },
-      };
-    }
-    if (project.id === 'recipe-app' && payload?.recipeApp) {
-      return {
-        ...project,
-        links: {
-          ...project.links,
-          demo: ensureHttps(payload.recipeApp),
-        },
-      };
-    }
-    if (project.id === 'appointment-system' && payload?.appointmentSystem) {
-      return {
-        ...project,
-        links: {
-          ...project.links,
-          repo: ensureHttps(payload.appointmentSystem),
-        },
-      };
-    }
-    if (project.id === 'insightpulse' && payload?.aiTaskManager) {
-      return {
-        ...project,
-        links: {
-          ...project.links,
-          repo: ensureHttps(payload.aiTaskManager),
-        },
-      };
-    }
-    if (project.id === 'carebridge-lite' && payload?.carebridge) {
-      return {
-        ...project,
-        links: {
-          ...project.links,
-          repo: ensureHttps(payload.carebridge),
-        },
-      };
-    }
-    return project;
-  });
-}
 
 export function usePortfolioDataSource() {
-  const [{ profile, projects, loading, error, source }, setState] =
-    useState(defaultState);
-
-  useEffect(() => {
-    let active = true;
-
-    async function loadLinks() {
-      try {
-        const response = await fetch(LINKS_ENDPOINT);
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
-        }
-
-        const payload = await response.json();
-        if (!active) return;
-
-        const profileLinks = {
-          ...fallbackProfile.links,
-          github: ensureHttps(payload?.github) ?? fallbackProfile.links.github,
-        };
-
-        setState({
-          profile: { ...fallbackProfile, links: profileLinks },
-          projects: mergeProjectLinks(fallbackProjects, payload),
-          loading: false,
-          error: null,
-          source: 'remote',
-        });
-      } catch (err) {
-        console.error('Error loading portfolio links', err);
-        if (!active) return;
-        setState({
-          profile: fallbackProfile,
-          projects: fallbackProjects,
-          loading: false,
-          error:
-            err instanceof Error ? err.message : 'Unexpected error loading data',
-          source: 'fallback',
-        });
-      }
-    }
-
-    loadLinks();
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  const featuredProject = useMemo(() => projects[0], [projects]);
+  const featuredProject = useMemo(() => fallbackProjects[0], []);
 
   return {
-    profile,
-    projects,
+    profile: fallbackProfile,
+    projects: fallbackProjects,
     featuredProject,
-    loading,
-    error,
-    source,
+    loading: false,
+    error: null,
+    source: 'static',
   };
 }
 

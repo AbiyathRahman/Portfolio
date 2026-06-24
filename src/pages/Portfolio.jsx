@@ -4,7 +4,7 @@ import ProjectCard from '../components/ProjectCard';
 import { usePortfolioData } from '../context/PortfolioContext';
 
 function PortfolioPage() {
-  const { projects, loading, error, source } = usePortfolioData();
+  const { projects, loading } = usePortfolioData();
 
   if (loading) {
     return <LoadingState message="Gathering case studies..." />;
@@ -12,19 +12,10 @@ function PortfolioPage() {
 
   return (
     <div className="page portfolio-page">
-      <header className="section">
+      {/* <header className="section">
         <p className="eyebrow">Portfolio</p>
         <h1>Selected work</h1>
-        {source === 'fallback' && (
-          <div className="alert">
-            <p>
-              Showing sample data. Add your Firebase configuration to display live
-              projects.
-            </p>
-          </div>
-        )}
-        {error && <p className="alert alert--error">{error}</p>}
-      </header>
+      </header> */}
 
       <div className="project-grid">
         {projects.map((project) => (

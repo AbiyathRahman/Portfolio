@@ -50,7 +50,7 @@ function Layout() {
       <footer className="site-footer">
         <div>
           <p>&copy; {new Date().getFullYear()} {profile?.name}. All rights reserved.</p>
-          <p className="site-footer__meta">Built with React, React Router, and Firebase.</p>
+          <p className="site-footer__meta">Built with React and React Router.</p>
         </div>
         <div className="site-footer__links">
           {profile?.links?.github && (
